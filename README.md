@@ -19,9 +19,23 @@ This project aims to create a tidy dataset from the original data. It will:
 - Labels the data set with descriptive variable names.
 - Create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+A more detailed step-by-step process is available in the comments of the run_analysis.R file.
 
 
+## Files Provided
+####run_analysis.R
+> Performs the operations on the raw UCI HAR data to export a tidy dataset.
 
+#####tidy_UCI_HAR.txt
+> The tidy dataset as a text file. It can be imported into R using:
+
+      data <- read.table('tidy_UCI_HAR.txt')
+
+#####README.md
+> A description of this project and its methods.
+
+#####CODEBOOK.md
+> A description of the fields in the tidy dataset.
 
 ---
 Work performed by William Wnekowicz - william.wnekowicz@gmail.com
