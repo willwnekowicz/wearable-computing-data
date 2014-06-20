@@ -23,18 +23,29 @@
   rm('X_train', 'y_train', 'subject_train', 'X_test', 'y_test', 'subject_test', 'train_set', 'test_set')
   gc()
 
-# TODO: Create a boolean vector of features that are means or standard deviations
-  features_boolean <-
+# Create a index vector of features that are means or standard deviations
+# and also manually add indexes for merged features (activity and subject)
+  features_index <- c(grep('mean\\(\\)|std\\(\\)',features$V2), 562, 563)
 
-# TODO: Use feature boolean to remove extraneous features
-  data <-
+# Create a vector of names based on features and also manually add names for
+# merged features (activity and subject)
+  feature_names <- c(as.character(features$V2), "Activity", "Subject")
 
-# TODO: Use feature names as descriptive variable names
-  data <-
+# Use feature names as descriptive variable names
+  names(data) <- features_names
 
-# TODO: Replace activity numbers with descriptive labels
-  data <-
+# Use feature index to remove extraneous features
+  data <- data[,features_index]
 
-# TODO: Remove all temporary variables used in this file
+# Replace activity numbers with descriptive labels
+  data$Activity <- activity_labels[data$Activity, 2]
 
-# TODO: Create a summary dataset on the mean of each activity and for each subject
+# Take another second to remove all temporary variables used in this file
+  rm('features', 'activity_labels', 'features_index', 'feature_names')
+  gc()
+
+# Export the tidy dataset
+  write.table(data, "tidy_UCI_HAR.txt")
+
+# TODO: Create and export a summary dataset on the mean of each activity and for
+# each subject
