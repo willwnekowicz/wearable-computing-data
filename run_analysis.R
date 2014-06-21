@@ -1,5 +1,8 @@
 ## This files cleans the UCI HAR Data Set to create a tidy dataset.
 
+# Load the libraries needed
+  library(reshape2)
+
 # Read all the files into variables
   X_train <- read.table('UCI HAR Dataset/train/X_train.txt')
   y_train <- read.table('UCI HAR Dataset/train/y_train.txt')
