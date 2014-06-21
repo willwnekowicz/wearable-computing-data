@@ -26,6 +26,10 @@
 # merged features (activity and subject)
   feature_names <- c(as.character(features$V2), "Activity", "Subject")
 
+# Clean up the Names by stripping punctuation but keeping the names generally
+# the same as the original dataset
+  feature_names <- gsub("[[:punct:]]", "", feature_names)
+
 # Use feature names as descriptive variable names
   names(data) <- feature_names
 
