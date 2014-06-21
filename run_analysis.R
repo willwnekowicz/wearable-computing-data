@@ -27,13 +27,11 @@
   names(data) <- feature_names
 
 # Take a second to cleanup variables we no longer need
-  #rm('X_train', 'y_train', 'subject_train', 'X_test', 'y_test', 'subject_test', 'train_set', 'test_set')
-  #gc()
+  rm('X_train', 'y_train', 'subject_train', 'X_test', 'y_test', 'subject_test', 'train_set', 'test_set', 'feature_names')
+  gc()
 
 # Create an index vector of features that are means or standard deviations
-# and also manually add indexes for merged features (activity and subject)
   features_index <- c(grep('mean\\(\\)|std\\(\\)',features$V2))
-
 
 # Melt the data and filter by the features index
   datamelt <- melt(data, c("Subject", "Activity"), features_index)
@@ -45,8 +43,8 @@
   data$Activity <- activity_labels[data$Activity, 2]
 
 # Take another second to remove all temporary variables used in this file
-  #rm('features', 'activity_labels', 'features_index', 'feature_names')
-  #gc()
+  rm('features', 'activity_labels', 'features_index','datamelt')
+  gc()
 
 # Export the tidy dataset
   write.table(data, "tidy_UCI_HAR.txt")
