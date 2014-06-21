@@ -19,33 +19,34 @@
 # Combine the test and training data sets
   data <- rbind(train_set, test_set)
 
-# Take a second to cleanup variables we no longer need
-  rm('X_train', 'y_train', 'subject_train', 'X_test', 'y_test', 'subject_test', 'train_set', 'test_set')
-  gc()
-
-# Create a index vector of features that are means or standard deviations
-# and also manually add indexes for merged features (activity and subject)
-  features_index <- c(grep('mean\\(\\)|std\\(\\)',features$V2), 562, 563)
-
 # Create a vector of names based on features and also manually add names for
 # merged features (activity and subject)
   feature_names <- c(as.character(features$V2), "Activity", "Subject")
 
 # Use feature names as descriptive variable names
-  names(data) <- features_names
+  names(data) <- feature_names
 
-# Use feature index to remove extraneous features
-  data <- data[,features_index]
+# Take a second to cleanup variables we no longer need
+  #rm('X_train', 'y_train', 'subject_train', 'X_test', 'y_test', 'subject_test', 'train_set', 'test_set')
+  #gc()
+
+# Create an index vector of features that are means or standard deviations
+# and also manually add indexes for merged features (activity and subject)
+  features_index <- c(grep('mean\\(\\)|std\\(\\)',features$V2))
+
+
+# Melt the data and filter by the features index
+  datamelt <- melt(data, c("Subject", "Activity"), features_index)
+
+# Obtain the mean of each of the measurements for each activity and each subject
+  data <- dcast(datamelt, Activity + Subject ~ variable, mean)
 
 # Replace activity numbers with descriptive labels
   data$Activity <- activity_labels[data$Activity, 2]
 
 # Take another second to remove all temporary variables used in this file
-  rm('features', 'activity_labels', 'features_index', 'feature_names')
-  gc()
+  #rm('features', 'activity_labels', 'features_index', 'feature_names')
+  #gc()
 
 # Export the tidy dataset
   write.table(data, "tidy_UCI_HAR.txt")
-
-# TODO: Create and export a summary dataset on the mean of each activity and for
-# each subject
