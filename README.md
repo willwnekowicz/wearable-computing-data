@@ -16,8 +16,8 @@ This project aims to create a tidy dataset from the original data. It will:
 - Merge the training and the test sets to create one data set.
 - Extract the measurements on the mean and standard deviation for each measurement.
 - Replace activity numbers with descriptive activity names.
-- Labels the data set with descriptive variable names.
-- Create a second, independent tidy data set with the average of each variable for each activity and each subject.
+- Label the data set with descriptive variable names.
+- Create an independent tidy data set with the average of each variable for each activity and each subject.
 
 A more detailed step-by-step process is available in the comments of the run_analysis.R file.
 
